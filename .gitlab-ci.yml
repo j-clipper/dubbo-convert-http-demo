@@ -1,0 +1,102 @@
+include:
+  - local: '/.deploy/.cicd-developer-vars.yml'
+  - local: '/.deploy/.ci-docker.yml' #TODO use remote
+  - local: '/.deploy/.cd-config.yml' #TODO use remote
+  - local: '/.deploy/.cd-deploy.yml' #TODO use remote
+variables:
+  # 项目打包上传的docker仓库组名
+  REGISTRY_GROUP: '$BUSINESS_NAME'
+  # 项目打包镜像名称
+  REGISTRY_IMAGE: '${APP_NAME}:${CI_PIPELINE_ID}-${CI_COMMIT_SHORT_SHA}'
+
+cache:  # 配置缓存，配置后，maven 下载的依赖可以被缓存起来，下次不需要重复去下载了
+  paths:
+    - ~/.m2/repository
+    - $TARGET_PATH
+
+stages:
+  - maven package
+  - build and push docker image
+  - deploy to dev
+  - deploy to test
+  - deploy to pre
+  - deploy to prod
+
+Maven build:
+  stage: mvn package
+  tags:
+    - runner-app
+  script:
+    - docker info
+    - mvn -DskipTests clean install  && mvn -DskipTests package
+  artifacts:
+    expire_in: 1 days
+    paths:
+      - $TARGET_PATH
+
+
+Image build:
+  stage: build and push docker image
+  tags:
+    - runner-app
+  extends: .docker
+
+Deploy To Dev:  #定义的 Jobs 之一，登录到目标服务器，然后执行指定的脚本，脚本的执行内容为：在指定docker仓库中下载最新的镜像，并启动
+  variables:
+    ENV_NAME: 'dev'
+    JAVA_OPTS: '$JVM_OPTS_DEV'
+  stage: deploy to dev 
+  tags:
+    - runner-app
+  extends: .deploy
+  only:
+    - master
+    - /^dev-.*/
+
+Deploy To Env Test1:
+  variables:
+    ENV_NAME: 'test1'
+    JAVA_OPTS: '$JVM_OPTS_TEST1'
+  stage: deploy to test
+  tags:
+    - runner-app
+  extends: .deploy
+  only:
+    - master
+    - /^test1-.*/
+
+Deploy To Env Test2:
+  variables:
+    ENV_NAME: 'test2'
+    JAVA_OPTS: '$JVM_OPTS_TEST2'
+  stage: deploy to test
+  tags:
+    - runner-app
+  extends: .deploy
+  only:
+    - master
+    - /^test2-.*/
+
+Deploy To Env Pre:
+  variables:
+    ENV_NAME: 'pre'
+    JAVA_OPTS: '$JVM_OPTS_PRE'
+  stage: deploy to pre 
+  tags:
+    - runner-app
+  extends: .deploy
+  only:
+    - master
+    - /^hotfix-.*/
+
+Deploy To Env Prod:
+  variables:
+    ENV_NAME: 'prod'
+    JAVA_OPTS: '$JVM_OPTS_PROD'
+  stage: deploy to prod 
+  tags:
+    - runner-app
+  extends: .deploy
+  only:
+    - master
+    - /^hotfix-.*/

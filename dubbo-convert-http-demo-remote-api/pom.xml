@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.wf2311.jclipper</groupId>
+        <artifactId>dubbo-convert-http-demo</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>dubbo-convert-http-demo-remote-api</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.wf2311.jclipper</groupId>
+            <artifactId>dubbo-convert-http-demo-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+    </dependencies>
+
+<!--    <build>-->
+<!--        <plugins>-->
+<!--&lt;!&ndash;            <plugin>&ndash;&gt;-->
+<!--&lt;!&ndash;                <groupId>org.apache.maven.plugins</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;                <artifactId>maven-compiler-plugin</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;                <version>3.5</version>&ndash;&gt;-->
+<!--&lt;!&ndash;                <configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <compilerArgs>&ndash;&gt;-->
+<!--&lt;!&ndash;                        &lt;!&ndash;配置此参数是为了在javac编译信息中保留方法的参数名称 &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                        <compilerArg>-parameters</compilerArg>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </compilerArgs>&ndash;&gt;-->
+<!--&lt;!&ndash;                </configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;            </plugin>&ndash;&gt;-->
+<!--            <plugin>-->
+<!--                <groupId>com.wf2311.jclipper</groupId>-->
+<!--                <artifactId>generate-default-springmvc-impl-maven-plugin</artifactId>-->
+<!--                <version>2022.1-SNAPSHOT</version>-->
+<!--                <configuration>-->
+<!--                    <scanPackages>-->
+<!--                        <scanPackage>jclipper.dubbo.demo.remote.api</scanPackage>-->
+<!--                    </scanPackages>-->
+<!--                    <enable>true</enable>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>generate-default-springmvc-impl</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>${project.groupId}</groupId>-->
+<!--                        <artifactId>${project.artifactId}</artifactId>-->
+<!--                        <version>${project.version}</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
+
+</project>
