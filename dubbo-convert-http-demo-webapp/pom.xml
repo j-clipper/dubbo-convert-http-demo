@@ -191,13 +191,13 @@
                         </goals>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.wf2311.jclipper</groupId>
-                        <artifactId>dubbo-convert-http-demo-remote-api</artifactId>
-                        <version>${project.version}</version>
-                    </dependency>
-                </dependencies>
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>com.wf2311.jclipper</groupId>-->
+<!--                        <artifactId>dubbo-convert-http-demo-remote-api</artifactId>-->
+<!--                        <version>${project.version}</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

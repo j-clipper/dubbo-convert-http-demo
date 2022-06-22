@@ -12,7 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ExampleErrorCodeEnum implements BaseErrorCode {
     DEFAULT(0,"业务异常");
-    private int code;
+    private Integer code;
 
     private String name;
 }
